@@ -1,7 +1,7 @@
 # GeoCmd v1.0
 
 command:
-  - /geocmd <reload/reset/disable>
+  - /geocmd [reload/reset/disable]
 
 permissions:
   - gc.reload / gc.reset / gc.disable / gc.update

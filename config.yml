@@ -1,0 +1,59 @@
+# default config.yml
+#
+#
+#
+
+debug: false
+msg:
+  prefix: '&7[&cGeoCmd&7]'
+  noperm: '&c/You do not have enough access privileges for this operation.'
+
+help:
+  - 'this help section can be deleted'
+  - '---'
+  - 'permissions:'
+  - 'gc.reload / gc.reset / gc.disable / gc.update'
+  - '---'
+  - '/geocmd reload - reloads the config settings'
+  - '/geocmd reset - resets the config to default'
+  - '/geocmd disable - disables the plugin untill you reload the server'
+  - '---'
+  - 'this plugin has an buildin update detection'
+  - 'it checks for an update when the plugin gets loaded'
+  - 'if there is an update all player with gc.update will get informed'
+  - 'you can then download it from the link presented to you in the console ;)'
+  - '---'
+  - 'the geolocation relies on a specific website. It will not function without it'
+  - 'it cannot detect the use of a proxy!'
+  - 'http://www.freegeoip.net is a service that can track ips and dns names'
+  - 'if the site goes down pm me on bukkit ;)'
+  - '---'
+  - 'you can get the 2-letter codes from the link below:'
+  - 'http://www.worldatlas.com/aatlas/ctycodes.htm'
+  - '---'
+  - 'all messages support bukkit colorcodes:'
+  - 'http://www.minecraftforum.net/forums/support/server-support/tutorials-and-faqs/1940467-bukkit-colour-codes'
+  - '---'
+  - '%player% gets replaced with the player name'
+  - '%ip% gets replaced with the client ip'
+  - '%cc% gets replaced with the country code'
+  - '---'
+  - 'Have fun playing :P'
+
+location:
+  DEFAULT:
+    command: 'say ERROR -_-'
+    console: true
+    info: 'used if freegeoip.net responds with an error / null ... OR the 2-letter code is not listed below'
+  US:
+    command: 'say [%cc%] [%player%] IP: %ip%'
+    console: true
+  DE:
+    command: 'say [%cc%] [%player%]'
+    console: true
+  ZM:
+    command: 'say O.o'
+    console: true
+  AF:
+    command: 'kill'
+    console: false

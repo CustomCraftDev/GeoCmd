@@ -42,18 +42,15 @@ help:
 
 location:
   DEFAULT:
-    command: 'say ERROR -_-'
-    console: true
-    info: 'used if freegeoip.net responds with an error / null ... OR the 2-letter code is not listed below'
+    - 'true,say Error'
+    - 'true,say second command'
+    - 'true,say third command'
+    - 'true,say ...'
   US:
-    command: 'say [%cc%] [%player%] IP: %ip%'
-    console: true
+    - 'true,say [%cc%] [%player%] IP: %ip%'
   DE:
-    command: 'say [%cc%] [%player%]'
-    console: true
+    - 'true,say [%cc%] [%player%] IP: %ip%'
   ZM:
-    command: 'say O.o'
-    console: true
+    - 'true,say O.o'
   AF:
-    command: 'kill'
-    console: false
+    - 'false,kill'

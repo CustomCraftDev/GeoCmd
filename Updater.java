@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Updater implements Listener{
 	private GeoCmd plugin;
-	private int version = 1;
+	private int version = 4;
 
 	@SuppressWarnings("deprecation")
 	public Updater(GeoCmd plugin) {

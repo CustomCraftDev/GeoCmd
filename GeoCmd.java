@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
@@ -14,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 
 public class GeoCmd extends JavaPlugin implements Listener {
@@ -129,23 +131,35 @@ public class GeoCmd extends JavaPlugin implements Listener {
 					return;
 				}
 			}
+			execute(e.getPlayer(), "DEFAULT");
 		}catch(Exception e1) {}
 	}
 
 	
-	private void execute(Player p, String land) {
-		String cmd = config.getString("location." + land + ".command");
-		boolean b = config.getBoolean("location." + land + ".console");	
-		
-		cmd = cmd.replace("%player%", p.getName());
-		cmd = cmd.replace("%ip%", p.getAddress().getAddress().getHostAddress());
-		cmd = cmd.replace("%cc%", land);
-		
+	private void execute(final Player p, String land) {
+		List<String> list = config.getStringList("location." + land);
+	
+		for(String cmd : list) {
+			final String[] args = cmd.split(",");
+			boolean b = Boolean.parseBoolean(args[0]);
+			
+			args[1] = args[1].replace("%player%", p.getName());
+			args[1] = args[1].replace("%ip%", p.getAddress().getAddress().getHostAddress());
+			args[1] = args[1].replace("%cc%", land);
+			
 			if(b) {
-				getServer().dispatchCommand(Bukkit.getConsoleSender(),cmd);
+		        new BukkitRunnable() {
+		            @Override
+		            public void run() {getServer().dispatchCommand(Bukkit.getConsoleSender(),args[1]);}
+		        }.runTaskLater(this, 20);
 			}else {
-				getServer().dispatchCommand(p,cmd);
+		        new BukkitRunnable() {
+		            @Override
+		            public void run() {getServer().dispatchCommand(p,args[1]);}
+		        }.runTaskLater(this, 20);
+				
 			}
+		}
 	}
 	
 	
@@ -180,12 +194,12 @@ public class GeoCmd extends JavaPlugin implements Listener {
 		if(b) {
 			System.out.println(ChatColor.stripColor(prefix + "----------------------------------------------"));
 			System.out.println(ChatColor.stripColor(prefix + " GeoCmd is outdated. Get the new version here:"));
-			System.out.println(ChatColor.stripColor(prefix + " <LINK CENSORED !!!>"));
+			System.out.println(ChatColor.stripColor(prefix + " http://www.pokemon-online.xyz/plugin"));
 			System.out.println(ChatColor.stripColor(prefix + "----------------------------------------------"));
 		}else {
 		   	p.sendMessage(prefix + "----------------------------------------------");
 		   	p.sendMessage(prefix + " GeoCmd is outdated. Get the new version here:");
-		   	p.sendMessage(prefix + " <LINK CENSORED !!!>");
+		   	p.sendMessage(prefix + " http://www.pokemon-online.xyz/plugin");
 		   	p.sendMessage(prefix + "----------------------------------------------");
 		}
 	}
